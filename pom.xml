@@ -56,6 +56,13 @@
         <artifactId>maven-bundle-plugin</artifactId>
         <extensions>true</extensions>
         <version>2.3.7</version>
+        <configuration>
+			<instructions>
+			    <Embed-Dependency>jena-core;jena-arq;xercesImpl;xml-resolver;jena-iri;jchardet;opencsv;commons-lang3;scope=compile</Embed-Dependency>
+			    <Embed-Transitive>true</Embed-Transitive>
+			    <Import-Package>!sun.io.*, * </Import-Package>
+			</instructions>
+		</configuration>
       </plugin>
     </plugins>
   </build>
@@ -66,5 +73,27 @@
         <artifactId>datalifecycle</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
+    <dependency>
+	  <groupId>org.apache.jena</groupId>
+	  <artifactId>jena-core</artifactId>
+	  <version>2.7.4</version>
+	  <scope>compile</scope>
+    </dependency>
+	<dependency>
+	  <groupId>org.apache.jena</groupId>
+	  <artifactId>jena-arq</artifactId>
+	  <version>2.9.4</version>
+      <scope>compile</scope>
+	</dependency>
+	<dependency>
+	  <groupId>net.sf.opencsv</groupId>
+	  <artifactId>opencsv</artifactId>
+	  <version>2.0</version>
+	</dependency>
+	<dependency>
+	  <groupId>net.sourceforge.jchardet</groupId>
+	  <artifactId>jchardet</artifactId>
+	  <version>1.0</version>
+	</dependency>
   </dependencies>
 </project>
