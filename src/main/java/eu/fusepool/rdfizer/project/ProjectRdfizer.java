@@ -2,13 +2,19 @@ package eu.fusepool.rdfizer.project;
 
 import java.io.InputStream;
 
+import org.apache.clerezza.rdf.core.Graph;
 import org.apache.clerezza.rdf.core.MGraph;
+import org.apache.clerezza.rdf.core.impl.SimpleMGraph;
+import org.apache.clerezza.rdf.core.serializedform.Parser;
+import org.apache.clerezza.rdf.core.serializedform.SupportedFormat;
+import org.apache.commons.io.IOUtils;
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.ConfigurationPolicy;
 import org.apache.felix.scr.annotations.Deactivate;
 import org.apache.felix.scr.annotations.Properties;
 import org.apache.felix.scr.annotations.Property;
+import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.osgi.framework.Constants;
 import org.osgi.service.component.ComponentContext;
@@ -16,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import eu.fusepool.datalifecycle.Rdfizer;
+
 
 
 @Component(immediate = true, metatype = true, policy = ConfigurationPolicy.OPTIONAL)
@@ -32,9 +39,28 @@ public class ProjectRdfizer implements Rdfizer {
     public final String RDFIZER_TYPE_LABEL = "rdfizer";
     public final String RDFIZER_TYPE_VALUE = "project";
     
+    public static final String  CALLS_QUERY = "/calls.q" ;
+    
+    @Reference
+    Parser parser;
+    
     public MGraph transform(InputStream stream) {
-        // TODO Auto-generated method stub
-        return null;
+        
+        Tarql tarql;
+        String csv2rdf;
+        MGraph resultGraph = new SimpleMGraph();
+        try {
+            tarql = new Tarql(CALLS_QUERY);
+            csv2rdf = tarql.transfrom(stream);
+            InputStream rdfStream = IOUtils.toInputStream(csv2rdf, "UTF-8");
+            Graph graph = parser.parse(rdfStream, SupportedFormat.RDF_XML);
+            resultGraph.addAll(graph);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+            
+        }
+        
+        return resultGraph;
     }
 
     public String getName() {        
