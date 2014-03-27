@@ -14,12 +14,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-Example Apache Stanbol Component
+Fusepool DLC - Project Support
 ===========
 
-This is an example Apache Stanbol component.
+Transform a CSV file (FP7 Projects) into RDF triples using SPARQL CONSTRUCT rules.
 
-To compile the engine run
+To compile the project run
 
     mvn install
 
@@ -28,7 +28,3 @@ To deploy the engine to a stanbol instance running on localhost port 8080 run
     mvn org.apache.sling:maven-sling-plugin:install
 
 
-After installing a new menu item pointing you to /fusepool-dlc-projects will appear.
-
-The example service allows to upload a file for which enhancement will be generated.
-The service can be accessed via browser as HTML or as RDF for machine clients.
