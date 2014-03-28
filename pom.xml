@@ -95,5 +95,11 @@
 	  <artifactId>jchardet</artifactId>
 	  <version>1.0</version>
 	</dependency>
+	<dependency>
+      <groupId>org.apache.clerezza</groupId>
+      <artifactId>org.apache.clerezza.rdf.jena.parser</artifactId>
+      <version>0.10-incubating-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>
