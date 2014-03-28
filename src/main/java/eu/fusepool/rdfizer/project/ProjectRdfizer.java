@@ -20,10 +20,7 @@ import org.osgi.framework.Constants;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import eu.fusepool.datalifecycle.Rdfizer;
-
-
 
 @Component(immediate = true, metatype = true, policy = ConfigurationPolicy.OPTIONAL)
 @Service(Rdfizer.class)
