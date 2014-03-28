@@ -29,22 +29,17 @@ public class Tarql {
 
 	
 	private static String outputFormat = "RDF/XML" ;
-	
-	
 	private String query ;
-	
 	
 	public Tarql(String query) {
 		this.query = query ;
 	}
 	
 	public String transfrom(InputStream is) throws Exception {
-		Model resultModel = ModelFactory.createDefaultModel();
 		
-		
+	    Model resultModel = ModelFactory.createDefaultModel();
 		Reader rQuery = readQuery() ;
 		TarqlQuery query = new TarqlParser(rQuery).getResult();
-		
 		Reader rData  = readCsv(is) ;
 		
 		List<Query> queries = query.getQueries() ;
@@ -60,25 +55,19 @@ public class Tarql {
 		qe.execConstruct(resultModel);
 		if(resultModel.isEmpty()) 
 			return null ;
-		resultModel.write(System.out, outputFormat, query.getPrologue().getBaseURI());
+		//resultModel.write(System.out, outputFormat, query.getPrologue().getBaseURI());
 		ByteArrayOutputStream bos = new ByteArrayOutputStream() ;
 		resultModel.write(bos) ;
  		return bos.toString("UTF-8") ;
 		//return new JenaGraphAdaptor(resultModel.getGraph()) ;
 	}
 	
-	
-	
-	
-	
-	Reader readQuery() throws UnsupportedEncodingException {
-		
+	private Reader readQuery() throws UnsupportedEncodingException {
 		InputStream toRet = this.getClass().getResourceAsStream(query) ;	
 		return new InputStreamReader(toRet, "UTF-8");
 	}
 	
-	Reader readCsv(InputStream is) throws UnsupportedEncodingException {
-	
+	private Reader readCsv(InputStream is) throws UnsupportedEncodingException {
 		return new InputStreamReader(is, "UTF-8");
 	}
 
