@@ -14,7 +14,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-Fusepool DLC - Project Support
+Fusepool DLC - FP7 Project Rdfizer 
 ===========
 
 Transform a CSV file (FP7 Projects) into RDF triples using SPARQL CONSTRUCT rules.
